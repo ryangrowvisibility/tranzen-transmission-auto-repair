@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --bg: oklch(0.99 0.002 20);
+  --tint: oklch(0.965 0.006 20);
+  --ink: oklch(0.22 0.012 260);
+  --muted: oklch(0.44 0.015 260);
+  --line: oklch(0.9 0.008 20);
+  --brand: oklch(0.52 0.19 27);
+  --brand-deep: oklch(0.42 0.16 27);
+  --brand-soft: oklch(0.95 0.025 25);
+  --cta: oklch(0.52 0.19 27);
+  --cta-hover: oklch(0.45 0.17 27);
+  --star: oklch(0.78 0.16 75);
+  --navy: oklch(0.28 0.04 260);
+  --navy-soft: oklch(0.95 0.01 260);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-tint: var(--tint);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-soft: var(--brand-soft);
+  --color-cta: var(--cta);
+  --color-cta-hover: var(--cta-hover);
+  --color-star: var(--star);
+  --color-navy: var(--navy);
+  --color-navy-soft: var(--navy-soft);
+}
+
+html {
+  background: var(--bg) !important;
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+body {
+  background: var(--bg) !important;
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.btn {
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 200ms ease, box-shadow 200ms ease;
+  touch-action: manipulation;
+}
+.btn:active { transform: scale(0.97); }
+.btn:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+
+.lift { transition: transform 240ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 240ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .lift:hover { transform: translateY(-3px); box-shadow: 0 14px 30px -18px oklch(0.25 0.03 260 / 0.4); }
+}
+
+.rise { animation: rise 560ms cubic-bezier(0.23, 1, 0.32, 1) both; }
+.rise-2 { animation-delay: 70ms; }
+.rise-3 { animation-delay: 140ms; }
+.rise-4 { animation-delay: 210ms; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+details summary { list-style: none; cursor: pointer; }
+details summary::-webkit-details-marker { display: none; }
+details .plus { transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+details[open] .plus { transform: rotate(45deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise { animation: none; }
+  .lift, .btn, details .plus { transition: none; }
+}
